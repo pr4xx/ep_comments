@@ -57,10 +57,12 @@
                 <span class="comment-created-at" datetime="${formattedDate}">${date}</span>
 
                 <span class="comment-actions-wrapper">
+                    {{if author == currentAuthorId}}
                     {{if text.length > 0}}
                         <span class="comment-edit buttonicon buttonicon-pencil" data-l10n-id="ep_comments_page.edit_comment.title"></span>
                     {{/if}}
                     <span class="comment-delete buttonicon buttonicon-trash" data-l10n-id="ep_comments_page.delete_comment.title"></span>
+                    {{/if}}
                 </span>
 
                 {{tmpl "#comment-text"}}
@@ -102,9 +104,10 @@
         <span class="to-label" data-l10n-id="ep_comments_page.comments_template.to">To</span>
         <span class="to-value">${changeTo}</span>
         <!-- Approve/revert button -->
+        {{if !readOnly}}
         <input type="Submit" class="btn btn-primary approve-suggestion-btn acl-write" value="Accept Change" data-l10n-id="ep_comments_page.comments_template.accept_change.value">
         <input type="Submit" class="btn btn-default revert-suggestion-btn acl-write" value="Revert Change" data-l10n-id="ep_comments_page.comments_template.revert_change.value">
-
+        {{/if}}
     </form>
     {{/if}}
 </script>
@@ -118,7 +121,9 @@
         {{if text && text.length > 0}}
             <div class="comment-reply-value-wrapper">
                 <span class="comment-text">${text}</span>
+                {{if author == currentAuthorId}}
                 <span class="comment-edit buttonicon buttonicon-pencil" data-l10n-id="ep_comments_page.edit_comment.title"></span>
+                {{/if}}
             </div>
         {{/if}}
 

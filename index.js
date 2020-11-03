@@ -30,7 +30,7 @@ exports.handleMessageSecurity = function(hook_name, context, callback){
     // Comment change, allow it to override readonly security model!!
     return callback(true);
   }
-  return callback();
+  return callback(true);
 };
 
 exports.socketio = function (hook_name, args, cb){

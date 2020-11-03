@@ -549,6 +549,7 @@ ep_comments.prototype.collectCommentReplies = function(callback){
   var container   = this.container;
   var commentReplies = this.commentReplies;
   var padComment  = this.padInner.contents().find('.comment');
+  var padId = this.padId;
 
   $.each(this.commentReplies, function(replyId, reply){
     var commentId = reply.commentId;
@@ -563,6 +564,8 @@ ep_comments.prototype.collectCommentReplies = function(callback){
     reply.text = reply.text || ""
     reply.date = prettyDate(reply.timestamp);
     reply.formattedDate = new Date(reply.timestamp).toISOString();
+    reply.readOnly = padId.startsWith('r.');
+    reply.currentAuthorId = pad.myUserInfo.userId;
 
     var content = $("#replyTemplate").tmpl(reply);
     // localize comment reply
@@ -601,6 +604,8 @@ ep_comments.prototype.insertComment = function(commentId, comment, index){
 
   comment.commentId = commentId;
   comment.reply = true;
+  comment.readOnly = this.padId.startsWith('r.');
+  comment.currentAuthorId = pad.myUserInfo.userId;
   content = $('#commentsTemplate').tmpl(comment);
 
   commentL10n.localize(content);
