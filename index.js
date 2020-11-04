@@ -132,8 +132,8 @@ exports.eejsBlock_mySettings = function (hook_name, args, cb) {
   return cb();
 };
 
-exports.eejsBlock_editbarMenuLeft = function (hook_name, args, cb) {
-  args.content = args.content + eejs.require("ep_comments_page/templates/commentBarButtons.ejs");
+exports.eejsBlock_editbarMenuRight = function (hook_name, args, cb) {
+  args.content = eejs.require("ep_comments_page/templates/commentBarButtons.ejs") + args.content;
   return cb();
 };
 
